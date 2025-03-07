@@ -6,6 +6,7 @@ import moment from "moment-timezone";
 import 'moment/locale/pt-br';
 
 import todayImage from '../../assets/imgs/today.jpg'
+import Task from "../../components/task";
 
 export default function TaskList() {
     const userTimeZone = moment.tz.guess(); //detecta fuso horario do dispositivo
@@ -30,7 +31,7 @@ export default function TaskList() {
             </ImageBackground>
 
             <View style={styles.taskList}>
-
+                <Task/>
             </View>
             <TouchableOpacity style={styles.addButton}activeOpacity={0.7}onPress={() => console.warn('+')}>
                 <Icon name="plus" size={40} color={'#fff'}/>
