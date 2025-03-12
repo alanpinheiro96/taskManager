@@ -1,4 +1,5 @@
 import { View, Text, TouchableWithoutFeedback, StyleSheet } from "react-native"
+import CommonStyles from "../CommonStyles";
 
 
 export default props => {
@@ -9,6 +10,10 @@ export default props => {
                     <View style={styles.pendig}></View>
                 </View>
             </TouchableWithoutFeedback>
+            <View>
+                <Text style={styles.desc}>Elaborar o MER do projeto do TCC</Text>
+                <Text style={styles.date}>11/03/2025</Text>
+            </View>
         </View>
     )
 }
@@ -33,5 +38,14 @@ const styles = StyleSheet.create({
         borderRadius: 13,
         borderWidth: 2,
         borderColor: '#555'
+    },
+    date: {
+        color: '#555',
+        fontSize: 12
+    },
+    desc: {
+        color: CommonStyles.colors.mainText,
+        fontSize: 15
     }
 })
+

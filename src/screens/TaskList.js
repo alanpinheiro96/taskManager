@@ -6,11 +6,10 @@ import moment from "moment-timezone";
 import 'moment/locale/pt-br';
 
 import todayImage from '../../assets/imgs/today.jpg'
-import Task from "../../components/task";
-
+import Task from "../../components/Task";
+ 
 export default function TaskList() {
     const userTimeZone = moment.tz.guess(); //detecta fuso horario do dispositivo
-    console.log(userTimeZone)
     const today = moment().tz("America/Sao_Paulo").locale('pt-br').format('ddd, D [de] MMMM')
     //const today = moment().locale('pt-br').format('ddd, D [de] MMMM')
 
