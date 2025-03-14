@@ -12,8 +12,53 @@ export default function TaskList() {
 
     const tasks = [
         {
-
-        }
+            id: Math.random(),
+            desc: 'Elaborar o MER do TCC',
+            estimateAt: new Date(),
+            doneAt: new Date()
+        },
+        {
+            id: Math.random(),
+            desc: 'Ajustar o figma',
+            estimateAt: new Date(),
+            doneAt: new Date()
+        },
+        {
+            id: Math.random(),
+            desc: 'Desenvolver o Backend do sistema',
+            estimateAt: new Date(),
+            doneAt: new Date()
+        },
+        {
+            id: Math.random(),
+            desc: '',
+            estimateAt: new Date(),
+            doneAt: new Date()
+        },
+        {
+            id: Math.random(),
+            desc: '',
+            estimateAt: new Date(),
+            doneAt: new Date()
+        },
+        {
+            id: Math.random(),
+            desc: '',
+            estimateAt: new Date(),
+            doneAt: new Date()
+        },
+        {
+            id: Math.random(),
+            desc: '',
+            estimateAt: new Date(),
+            doneAt: new Date()
+        },
+        {
+            id: Math.random(),
+            desc: '',
+            estimateAt: new Date(),
+            doneAt: new Date()
+        },
     ]
 
     const userTimeZone = moment.tz.guess(); //detecta fuso horario do dispositivo
