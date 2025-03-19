@@ -7,7 +7,7 @@ import 'moment/locale/pt-br';
 
 import todayImage from '../../assets/imgs/today.jpg'
 import Task from "../components/Task";
- 
+
 export default function TaskList() {
 
     const tasks = [
@@ -21,7 +21,7 @@ export default function TaskList() {
             id: Math.random(),
             desc: 'Ajustar o figma',
             estimateAt: new Date(),
-            doneAt: new Date()
+            doneAt: null
         },
         {
             id: Math.random(),
@@ -65,13 +65,24 @@ export default function TaskList() {
     const today = moment().tz("America/Sao_Paulo").locale('pt-br').format('ddd, D [de] MMMM')
     //const today = moment().locale('pt-br').format('ddd, D [de] MMMM')
 
-    return(
-        <View style={styles.container}> 
+
+    toogleTask = taskId => {
+        const taskList = [...tasks]
+        TaskList.forEach(task => {
+            if (task.id === taskId) {
+                task.doneAt = task.doneAt ? null : new Date()
+            }
+        });
+        tasks = taskList
+    }
+
+    return (
+        <View style={styles.container}>
 
             <ImageBackground source={todayImage} style={styles.background}>
                 <View style={styles.iconBar}>
                     <TouchableOpacity onPress={() => console.warn('oi')}>
-                        <Icon name="eye" size={60} color={'#fff'}/>
+                        <Icon name="eye" size={60} color={'#fff'} />
                     </TouchableOpacity>
                 </View>
 
@@ -85,11 +96,11 @@ export default function TaskList() {
                 <FlatList
                     data={tasks}
                     keyExtractor={item => `${item.id}`}
-                    renderItem={({item}) => <Task {...item} />}
+                    renderItem={({ item }) => <Task {...item} />}
                 />
             </View>
-            <TouchableOpacity style={styles.addButton}activeOpacity={0.7}onPress={() => console.warn('+')}>
-                <Icon name="plus" size={40} color={'#fff'}/>
+            <TouchableOpacity style={styles.addButton} activeOpacity={0.7} onPress={() => console.warn('+')}>
+                <Icon name="plus" size={40} color={'#fff'} />
             </TouchableOpacity>
 
         </View>
@@ -99,7 +110,7 @@ export default function TaskList() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-       
+
     },
     background: {
         flex: 3,
@@ -135,7 +146,7 @@ const styles = StyleSheet.create({
         right: 30,
         bottom: 30,
         width: 50,
-        borderRadius: 25, 
+        borderRadius: 25,
         backgroundColor: '#B13B44',
         justifyContent: 'center',
         alignItems: 'center'
