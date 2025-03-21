@@ -1,79 +1,50 @@
+import { useState } from "react";
 import { Text, View, StyleSheet, ImageBackground, TouchableOpacity, FlatList } from "react-native";
-
 import Icon from "react-native-vector-icons/FontAwesome";
-
 import moment from "moment-timezone";
 import 'moment/locale/pt-br';
 
 import todayImage from '../../assets/imgs/today.jpg'
 import Task from "../components/Task";
 
+const taskDB = [
+    {
+        id: Math.random(),
+        desc: 'Elaborar o MER do TCC',
+        estimateAt: new Date(),
+        doneAt: null
+    },
+    {
+        id: Math.random(),
+        desc: 'Ajustar o figma',
+        estimateAt: new Date(),
+        doneAt: new Date()
+    },
+    {
+        id: Math.random(),
+        desc: 'Desenvolver o Backend do sistema',
+        estimateAt: new Date(),
+        doneAt: null
+    }
+]
+
 export default function TaskList() {
 
-    const tasks = [
-        {
-            id: Math.random(),
-            desc: 'Elaborar o MER do TCC',
-            estimateAt: new Date(),
-            doneAt: new Date()
-        },
-        {
-            id: Math.random(),
-            desc: 'Ajustar o figma',
-            estimateAt: new Date(),
-            doneAt: null
-        },
-        {
-            id: Math.random(),
-            desc: 'Desenvolver o Backend do sistema',
-            estimateAt: new Date(),
-            doneAt: new Date()
-        },
-        {
-            id: Math.random(),
-            desc: '',
-            estimateAt: new Date(),
-            doneAt: new Date()
-        },
-        {
-            id: Math.random(),
-            desc: '',
-            estimateAt: new Date(),
-            doneAt: new Date()
-        },
-        {
-            id: Math.random(),
-            desc: '',
-            estimateAt: new Date(),
-            doneAt: new Date()
-        },
-        {
-            id: Math.random(),
-            desc: '',
-            estimateAt: new Date(),
-            doneAt: new Date()
-        },
-        {
-            id: Math.random(),
-            desc: '',
-            estimateAt: new Date(),
-            doneAt: new Date()
-        },
-    ]
+    const [tasks, setTasks] = useState([...taskDB])
 
     const userTimeZone = moment.tz.guess(); //detecta fuso horario do dispositivo
     const today = moment().tz("America/Sao_Paulo").locale('pt-br').format('ddd, D [de] MMMM')
     //const today = moment().locale('pt-br').format('ddd, D [de] MMMM')
 
 
-    toogleTask = taskId => {
+    const toggleTask = taskId => {
         const taskList = [...tasks]
-        TaskList.forEach(task => {
+        taskList.forEach(task => {
             if (task.id === taskId) {
                 task.doneAt = task.doneAt ? null : new Date()
             }
         });
-        tasks = taskList
+        setTasks(taskList)
     }
 
     return (
@@ -96,7 +67,7 @@ export default function TaskList() {
                 <FlatList
                     data={tasks}
                     keyExtractor={item => `${item.id}`}
-                    renderItem={({ item }) => <Task {...item} />}
+                    renderItem={({ item }) => <Task {...item} onToggleTask={toggleTask} />}
                 />
             </View>
             <TouchableOpacity style={styles.addButton} activeOpacity={0.7} onPress={() => console.warn('+')}>
