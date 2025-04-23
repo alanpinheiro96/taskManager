@@ -1,13 +1,10 @@
+
 export default {
     fontFamily: 'Lato_400Regular',
-    colors: 
-    {
+    colors: {
         today: '#B13B44',
         secondary: '#FFF',
         mainText: '#222',
-        subText: '#555',
-        
+        subText: '#555'
     }
 }
-
-
