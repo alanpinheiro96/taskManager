@@ -1,29 +1,61 @@
 import { useState } from "react";
-import { Modal, StyleSheet, Text, TextInput, TouchableOpacity, TouchableWithoutFeedback, View } from "react-native";
+import { Modal, Platform, StyleSheet, Text, TextInput, TouchableOpacity, TouchableWithoutFeedback, View } from "react-native";
 import commonStyles from "../CommonStyles";
 
-export default function AddTask(props){
+import moment from "moment";
+import DateTimePicker from "@react-native-community/datetimepicker";
+
+
+export default function AddTask(props) {
 
     const [desc, setDesc] = useState("");
 
-    return(
-        <Modal transparent={true} 
-            visible={props.isVisible} 
+    const getDatePicker = () => {
+        let datePicker = <DateTimePicker value={date} onChange={(_, date) => {
+            setDate(date)
+            setShowDatePicker(false)
+        }}
+            mode='date'
+        />
+
+        const dateString = moment(date).format('dd, D [de] MMMM [de] YYYY')
+
+        if (Platform.OS === 'android') {
+            datePicker = (
+                <View>
+                    <TouchableOpacity onPress={() => setShowDatePicker(true)}>
+                        <Text style={styles.date}>
+                            {dateString}
+                        </Text>
+                    </TouchableOpacity>
+                    {setShowDatePicker && datePicker}
+                </View >
+            )
+        }
+        return datePicker
+    }
+
+    return (
+        <Modal transparent={true}
+            visible={props.isVisible}
             onRequestClose={props.onCancel}
             animationType="slide">
 
-            <TouchableWithoutFeedback 
+            <TouchableWithoutFeedback
                 onPress={props.onCancel}>
 
                 <View style={styles.background}></View>
             </TouchableWithoutFeedback>
             <View style={styles.container}>
                 <Text style={styles.header}> Nova Tarefa</Text>
-                <TextInput 
-                    style={styles.input} 
+                <TextInput
+                    style={styles.input}
                     placeholder="Informe a Descrição"
                     onChangeText={setDesc}
                     value={desc} />
+
+                {this.getDatePicker()}
+
                 <View style={styles.buttons}>
                     <TouchableOpacity onPress={props.onCancel}>
                         <Text style={styles.button}>Cancelar</Text>
@@ -35,9 +67,9 @@ export default function AddTask(props){
                 </View>
             </View>
 
-            <TouchableWithoutFeedback 
+            <TouchableWithoutFeedback
                 onPress={props.onCancel}>
-                    
+
                 <View style={styles.background}></View>
             </TouchableWithoutFeedback>
         </Modal>
